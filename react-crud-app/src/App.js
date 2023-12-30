@@ -103,7 +103,7 @@ export const App = () => {
           handleDelete={handleDelete}
           clearItems={clearItems}
         />
-      </div>
+      </div>s
       <div
         style={{ display: "flex", justifyContent: "end", marginTop: "1rem" }}
       >

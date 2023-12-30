@@ -1,7 +1,7 @@
 class Github {
   constructor() {
-    this.client_id = "83cad9af0036b4616f6d";
-    this.client_secret = "eb094e4712d39ae6ed95007aecc8179816772530";
+    this.client_id = "";
+    this.client_secret = "";
     this.repos_count = 5;
     this.repos_sort = "created: asc"; // created = 데이터를 생성 날짜에 따라 정렬한다, asc = 오름차순으로
   }
@@ -18,6 +18,6 @@ class Github {
     const profile = await profileResponse.json();
     const repos = await repoResponse.json();
 
-    return { profile, repos }
+    return { profile, repos };
   }
 }
