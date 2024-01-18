@@ -1,7 +1,7 @@
 class Github {
   constructor() {
-    this.client_id = "";
-    this.client_secret = "";
+    this.client_id = '';
+    this.client_secret = '';
     this.repos_count = 5;
     this.repos_sort = "created: asc"; // created = 데이터를 생성 날짜에 따라 정렬한다, asc = 오름차순으로
   }
