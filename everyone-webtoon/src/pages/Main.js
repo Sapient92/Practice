@@ -1,6 +1,14 @@
 import React from "react";
+import DayButtons from "../components/DayButtons";
+import Rows from "../components/Rows";
 
-const Main = ({providerData}) => {
+const Main = ({
+  providerData,
+  handleButtonClick,
+  dayData,
+  setDay,
+  todayWebToon,
+}) => {
   const randomWebtoon = () => {
     const randomNumber =
       providerData[Math.floor(Math.random() * 3)].webtoons[
@@ -31,17 +39,16 @@ const Main = ({providerData}) => {
             <span>{selectedWebtoon.updateDays}</span>
           </div>
           <div className="main-link">
-            <a href={selectedWebtoon.url} target="_blank">
+            <a href={selectedWebtoon.url} target="blank">
               <span>보러 가기</span>
             </a>
           </div>
         </div>
       </div>
+      <DayButtons handleButtonClick={handleButtonClick} dayData={dayData} />
+      <Rows todayWebToon={todayWebToon} />
     </div>
   );
 };
 
 export default Main;
-
-// 헤더 만들기(검색 기능)
-// 플랫폼 별 목록 나열

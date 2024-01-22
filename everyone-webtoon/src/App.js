@@ -2,13 +2,13 @@ import {Route, Routes} from "react-router-dom";
 import "./App.css";
 import Main from "./pages/Main";
 import Detail from "./pages/Detail";
-import WebToonList from "./api/ComicApi";
+import WebToonList, {dayWebToons} from "./api/ComicApi";
 import {useEffect, useState} from "react";
 import Header from "./components/Header";
 import Details from "./pages/Details";
 
 const provider = ["naver", "kakao", "kakaoPage"];
-const day = [
+const dayData = [
   {id: 1, name: "월요일", value: "mon"},
   {id: 2, name: "화요일", value: "tue"},
   {id: 3, name: "수요일", value: "wed"},
@@ -18,25 +18,49 @@ const day = [
   {id: 7, name: "일요일", value: "sun"},
 ];
 
-const eachProvider = () => {
+export const eachProvider = () => {
   return provider.map((data) => data);
 };
-const eachDay = () => {
-  const eachDay = day.map((data) => data.value);
+export const eachDay = () => {
+  const eachDay = dayData.map((data) => data.value);
   return eachDay;
 };
+
+const fullDay = new Date().toString();
+export const today = fullDay.substring(0, 3).toLowerCase();
 
 const webToonList = new WebToonList(eachProvider(), eachDay());
 
 function App() {
   const [providerData, setProviderData] = useState([]);
+  const [day, setDay] = useState(today);
+  const [todayWebToon, setTodayWebToon] = useState([]);
+
   useEffect(() => {
-    const getEachProviderWebtoon = async () => {
-      const eachProviderData = await webToonList.getProviderWebToon(provider);
-      setProviderData(eachProviderData);
-    };
     getEachProviderWebtoon();
-  }, []);
+    todayList();
+  }, [day]);
+
+  const getEachProviderWebtoon = async () => {
+    const eachProviderData = await webToonList.getProviderWebToon();
+    setProviderData(eachProviderData);
+  };
+
+  const todayList = async () => {
+    const response = await Promise.all(
+      provider.map(async (data) => {
+        const todayWebToon = dayWebToons(data, day);
+        return todayWebToon;
+      })
+    );
+    return setTodayWebToon(response);
+  };
+
+  const handleButtonClick = (en) => {
+    const buttonClick = dayData.filter((data) => data.value === en);
+    setDay(buttonClick[0].value);
+  };
+  console.log(day);
 
   if (providerData.length === 0) {
     return (
@@ -49,7 +73,18 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<Main providerData={providerData} />} />
+          <Route
+            path="/"
+            element={
+              <Main
+                todayWebToon={todayWebToon}
+                providerData={providerData}
+                dayData={dayData}
+                setDay={setDay}
+                handleButtonClick={handleButtonClick}
+              />
+            }
+          />
           <Route path="details/:id" element={<Details />} />
           <Route path="/detail/:id" element={<Detail />} />
         </Routes>
@@ -60,6 +95,5 @@ function App() {
 
 export default App;
 
-// 메인 화면에 플랫폼별로 웹툰 나열
-// 요일 버튼 누르면 나열 바뀌게 하기
 // 각 메인화면 플랫폼 무한 스크롤
+// 메인화면 요일별 웹툰 누르면 상세 페이지로 이동

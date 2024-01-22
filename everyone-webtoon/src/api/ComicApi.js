@@ -44,3 +44,11 @@ export class Search {
     return search;
   }
 }
+
+export const dayWebToons = async (provider, day) => {
+  const dayWebToonResponse = await fetch(
+    `https://korea-webtoon-api.herokuapp.com/?service=${provider}&updateDay=${day}&perPage=25`
+  );
+  const dayWebToon = await dayWebToonResponse.json();
+  return dayWebToon;
+};
