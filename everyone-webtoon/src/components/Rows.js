@@ -26,8 +26,13 @@ const Rows = ({todayWebToon}) => {
             <h2>네이버</h2>
             <div className="img-box">
               {naverWebtoons.map((data) => (
-                <div onClick={handleImgClick} key={data._id} className="box">
-                  <img id={data._id} src={data.img} alt={data.title} />
+                <div key={data._id} className="box">
+                  <img
+                    onClick={handleImgClick}
+                    id={data._id}
+                    src={data.img}
+                    alt={data.title}
+                  />
                   <br />
                   <span>{data.title}</span>
                 </div>

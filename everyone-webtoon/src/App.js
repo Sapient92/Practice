@@ -38,6 +38,9 @@ function App() {
 
   useEffect(() => {
     getEachProviderWebtoon();
+  }, []);
+
+  useEffect(() => {
     todayList();
   }, [day]);
 
@@ -94,4 +97,7 @@ function App() {
 
 export default App;
 
-// 각 메인화면 플랫폼 무한 스크롤
+// 컴포넌트 나누고 최적화 하기
+// 상세 페이지에서 찜하기 기능 만들기
+// api 불러오는 코드 정리
+// useReducer, context api 사용해서 코드 고치기

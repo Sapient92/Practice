@@ -6,14 +6,18 @@ const Detail = () => {
   const selectedData = location.state;
 
   return (
-    <div>
-      <div>
+    <div className="Detail">
+      <div className="Detail-box">
         <img src={selectedData[0].img} alt="selcted-webtoon" />
-        <p>{selectedData[0].title}</p>
-        <span>{selectedData[0].author}</span>
-        <a href={selectedData[0].url} target="_blank">
-          더보기
-        </a>
+        <div className="name-box">
+          <p>제목: {selectedData[0].title}</p>
+          <span>작가: {selectedData[0].author}</span>
+          <div className="detail-link">
+            <a href={selectedData[0].url} target="_blank">
+              웹툰 보기
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
