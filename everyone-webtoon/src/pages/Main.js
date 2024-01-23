@@ -1,14 +1,12 @@
 import React from "react";
 import DayButtons from "../components/DayButtons";
 import Rows from "../components/Rows";
+import {useLocation, useNavigate} from "react-router-dom";
 
-const Main = ({
-  providerData,
-  handleButtonClick,
-  dayData,
-  setDay,
-  todayWebToon,
-}) => {
+const Main = ({providerData, handleButtonClick, dayData, todayWebToon}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const randomWebtoon = () => {
     const randomNumber =
       providerData[Math.floor(Math.random() * 3)].webtoons[
@@ -18,10 +16,20 @@ const Main = ({
   };
   const selectedWebtoon = randomWebtoon();
 
+  const handleImgClick = (event) => {
+    const id = event.target.id;
+    navigate(`/detail/${id}`, {state: [selectedWebtoon]});
+  };
+
   return (
     <div className="Main">
       <div className="main-img">
-        <img src={selectedWebtoon.img} alt="main-webtoon-img" />
+        <img
+          onClick={handleImgClick}
+          id={selectedWebtoon._id}
+          src={selectedWebtoon.img}
+          alt="main-webtoon-img"
+        />
       </div>
       <div className="info-box">
         <div className="main-img-box">

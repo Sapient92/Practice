@@ -60,7 +60,6 @@ function App() {
     const buttonClick = dayData.filter((data) => data.value === en);
     setDay(buttonClick[0].value);
   };
-  console.log(day);
 
   if (providerData.length === 0) {
     return (
@@ -96,4 +95,3 @@ function App() {
 export default App;
 
 // 각 메인화면 플랫폼 무한 스크롤
-// 메인화면 요일별 웹툰 누르면 상세 페이지로 이동

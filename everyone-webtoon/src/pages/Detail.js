@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 const Detail = () => {
   const location = useLocation();
   const selectedData = location.state;
-  console.log(selectedData);
+
   return (
     <div>
       <div>
