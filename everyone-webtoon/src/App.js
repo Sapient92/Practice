@@ -101,3 +101,5 @@ export default App;
 // 상세 페이지에서 찜하기 기능 만들기
 // api 불러오는 코드 정리
 // useReducer, context api 사용해서 코드 고치기
+// redux 사용하기
+// 코드 typescript로 바꾸기
