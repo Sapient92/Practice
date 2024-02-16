@@ -1,0 +1,47 @@
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  width: 400px;
+  height: 500px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+/* Navbar */
+
+.Navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.Navbar button {
+  font-size: 25px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.Navbar .active {
+  color: red;
+  text-decoration: underline;
+}
+
+/* ApiList */
+
+.ApiList {
+  overflow-y: scroll;
+  height: 350px;
+}
+
+/* StateList */
+
+.StateList {
+  overflow-y: scroll;
+  height: 350px;
+}
