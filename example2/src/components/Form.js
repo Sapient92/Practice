@@ -1,7 +1,15 @@
+import React, { useRef, useState } from "react";
+import SubmitButton from "./SubmitButton";
 import axios from "axios";
-import React, {useRef, useState} from "react";
 
-const Form = ({setTodos, todos}) => {
+const Form = ({
+  todoApi,
+  todoState,
+  setTodos,
+  todos,
+  apiTodos,
+  setApiTodos,
+}) => {
   const [title, setTitle] = useState("");
   const [todo, setTodo] = useState("");
   const _id = useRef(10000);
@@ -17,29 +25,42 @@ const Form = ({setTodos, todos}) => {
   const handleTodoSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
-      id: _id,
+      id: _id.current,
       title,
       content: todo,
       createdAt: new Date().toISOString(),
     };
-    _id.current++;
     setTodos([...todos, newTodo]);
-
+    _id.current++;
+    setTitle("");
+    setTodo("");
+  };
+  const handleApiSumbit = (e) => {
+    e.preventDefault();
+    const newTodo = {
+      id: _id.current,
+      title,
+      content: todo,
+      createdAt: new Date().toISOString(),
+    };
     axios
       .post("https://topdragon.co.kr/todo", newTodo)
+      .then((res) => setApiTodos([...apiTodos, res.data]))
       .catch((err) => console.log("post 실패:", err));
     setTitle("");
     setTodo("");
   };
+
   return (
-    <form onSubmit={handleTodoSubmit}>
+    <form>
       <p>
-        제목: <input value={title} onChange={handleInputChange} />
+        제목: <input type="text" value={title} onChange={handleInputChange} />
       </p>
       <p>
-        할 일: <input value={todo} onChange={handleTodoChange} />
+        할 일: <input type="text" value={todo} onChange={handleTodoChange} />
       </p>
-      <button>작성완료</button>
+      {todoState && <SubmitButton handleSubmit={handleTodoSubmit} />}
+      {todoApi && <SubmitButton handleSubmit={handleApiSumbit} />}
     </form>
   );
 };

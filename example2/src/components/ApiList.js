@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import Form from "./Form";
 
-const ApiList = () => {
+const ApiList = ({ todoApi }) => {
   const [apiTodos, setApiTodos] = useState(null);
   useEffect(() => {
     const apiList = async () => {
@@ -19,17 +20,20 @@ const ApiList = () => {
   }
 
   return (
-    <div className="ApiList">
-      {apiTodos.map((todo) => (
-        <div key={todo.idx}>
-          <div>
-            <p>제목 : {todo.title}</p>
-            <p>할 일 : {todo.content}</p>
+    <>
+      <div className="ApiList">
+        {apiTodos.map((todo) => (
+          <div key={todo.idx}>
+            <div>
+              <p>제목 : {todo.title}</p>
+              <p>할 일 : {todo.content}</p>
+            </div>
+            <div>{todo.createdAt}</div>
           </div>
-          <div>{todo.createdAt}</div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <Form todoApi={todoApi} apiTodos={apiTodos} setApiTodos={setApiTodos} />
+    </>
   );
 };
 

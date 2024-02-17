@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import StateList from "./components/StateList";
@@ -9,6 +9,7 @@ function App() {
   const [todoState, setTodoState] = useState(true);
   const [todoApi, setTodoApi] = useState(false);
   const [todos, setTodos] = useState([]);
+
   return (
     <div className="App">
       <div className="container">
@@ -18,9 +19,10 @@ function App() {
           setTodoState={setTodoState}
           setTodoApi={setTodoApi}
         />
-        {todoState && <StateList todos={todos} />}
-        {todoApi && <ApiList />}
-        <Form todos={todos} setTodos={setTodos} />
+        {todoState && (
+          <StateList setTodos={setTodos} todoState={todoState} todos={todos} />
+        )}
+        {todoApi && <ApiList todoApi={todoApi} />}
       </div>
     </div>
   );
