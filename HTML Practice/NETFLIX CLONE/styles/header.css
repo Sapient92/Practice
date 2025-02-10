@@ -1,0 +1,45 @@
+.header {
+  width: 100%;
+  display: flex;
+}
+
+.header_navbar {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 5;
+}
+
+.header_logo {
+  width: 96px;
+  margin-left: 7px;
+  cursor: pointer;
+}
+
+.header_profile {
+  width: 38px;
+  height: 38px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.main_thumbnail {
+  width: 100%;
+  position: relative;
+
+  img {
+    max-height: 500px;
+  }
+}
+
+.main_thumbnail_info {
+  position: absolute;
+  width: 200px;
+  top: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
